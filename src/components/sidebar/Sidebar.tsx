@@ -41,7 +41,7 @@ export const Sidebar = () => {
         {!collapsed && (
           <h1 className="text-xl font-bold text-white">Med Vault</h1>
         )}
-        <button onClick={toggleSidebar} className="p-2 rounded-full hover:bg-white/10">
+        <button onClick={toggleSidebar} className="p-2 rounded-full hover:bg-white/10 text-white">
           {collapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
         </button>
       </div>
@@ -58,7 +58,7 @@ export const Sidebar = () => {
                   className={`flex items-center p-3 rounded-lg transition-colors ${
                     isActive 
                       ? "bg-medPurple text-white" 
-                      : "hover:bg-white/10"
+                      : "bg-white/5 hover:bg-white/10 text-white"
                   }`}
                 >
                   <span className="mr-3">{item.icon}</span>

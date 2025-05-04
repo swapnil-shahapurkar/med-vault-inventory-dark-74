@@ -37,6 +37,7 @@ const initialMedicines: Medicine[] = [
     expiryDate: new Date(2024, 11, 31).toISOString(),
     category: "Pain Relief",
     description: "For fever and mild pain",
+    shelfNumber: "A-12",
     createdAt: new Date(2023, 1, 15).toISOString(),
     updatedAt: new Date(2023, 1, 15).toISOString()
   },
@@ -49,6 +50,7 @@ const initialMedicines: Medicine[] = [
     expiryDate: new Date(2024, 10, 15).toISOString(),
     category: "Antibiotics",
     description: "For bacterial infections",
+    shelfNumber: "B-05",
     createdAt: new Date(2023, 2, 10).toISOString(),
     updatedAt: new Date(2023, 2, 10).toISOString()
   },
@@ -61,6 +63,7 @@ const initialMedicines: Medicine[] = [
     expiryDate: new Date(2025, 3, 20).toISOString(),
     category: "Allergy",
     description: "For allergy symptoms",
+    shelfNumber: "C-08",
     createdAt: new Date(2023, 3, 5).toISOString(),
     updatedAt: new Date(2023, 3, 5).toISOString()
   }

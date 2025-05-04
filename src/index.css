@@ -70,4 +70,20 @@
   .text-gradient {
     @apply bg-gradient-to-r from-medPurple to-medPurple-light bg-clip-text text-transparent;
   }
+  
+  /* Medical animation utilities */
+  @keyframes float-up {
+    0% {
+      transform: translateY(0) rotate(0);
+      opacity: 0.2;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(20deg);
+      opacity: 0;
+    }
+  }
+  
+  .medical-icon {
+    animation: float-up 15s linear infinite;
+  }
 }

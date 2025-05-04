@@ -61,14 +61,15 @@ export const MedicineList = () => {
   const filteredMedicines = medicines.filter(med => 
     med.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (med.manufacturer && med.manufacturer.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (med.category && med.category.toLowerCase().includes(searchTerm.toLowerCase()))
+    (med.category && med.category.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    (med.shelfNumber && med.shelfNumber.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <Input
-          placeholder="Search medicines..."
+          placeholder="Search by name, manufacturer, category or shelf number..."
           className="max-w-md"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -133,6 +134,10 @@ export const MedicineList = () => {
                   <span className="font-medium">
                     {new Date(medicine.expiryDate).toLocaleDateString()}
                   </span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-muted-foreground">Shelf</span>
+                  <span className="font-medium">{medicine.shelfNumber || "—"}</span>
                 </div>
               </div>
               
