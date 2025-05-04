@@ -127,12 +127,14 @@ const Index = () => {
       </footer>
       
       {/* Add CSS for animated background */}
-      <style jsx>{`
+      <style>
+        {`
         .animated-background {
           background: radial-gradient(circle at 50% 50%, rgba(155, 135, 245, 0.1), rgba(0, 0, 0, 0));
           overflow: hidden;
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
