@@ -5,20 +5,20 @@ pipeline {
     CONTAINER_NAME = "med-vault-container"
   }
   stages {
-  stage('Clone') {
-    steps {
+    stage('Clone') {
+      steps {
         git credentialsId: 'github-creds',
             url: 'https://github.com/swapnil-shahapurkar/med-vault-inventory-dark-15.git',
             branch: 'main'
+      }
     }
-}
 
-    }
     stage('Build Docker Image') {
       steps {
         sh "docker build -t $DOCKER_IMAGE ."
       }
     }
+
     stage('Deploy') {
       steps {
         sh "docker stop $CONTAINER_NAME || true"
