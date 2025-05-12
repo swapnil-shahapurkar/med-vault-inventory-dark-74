@@ -1,30 +1,53 @@
 pipeline {
     agent any
+
     environment {
-        IMAGE_NAME = "medvault"
-        CONTAINER_NAME = "medvault-container"
+        DOCKER_IMAGE = 'medvault'
+        CONTAINER_NAME = 'medvault_container'
+        PORT_MAPPING = '3000:4173'
     }
+
+    tools {
+        nodejs 'NodeJS_18' // Make sure you configured this Node.js tool in Jenkins
+    }
+
     stages {
-        stage('Pull Latest Code') {
+        stage('Checkout') {
             steps {
-                git credentialsId: 'github', url: 'https://github.com/swapnil-shahapurkar/med-vault-inventory-dark-15.git'
+                git credentialsId: 'github', url: 'https://github.com/swapnil-shahapurkar/med-vault-inventory-dark-15.git', branch: 'main'
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                script {
+                    sh """
+                        docker stop \$CONTAINER_NAME || true
+                        docker rm \$CONTAINER_NAME || true
+                    """
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME .'
+                sh 'docker build -t \$DOCKER_IMAGE .'
             }
         }
 
-        stage('Deploy Container') {
+        stage('Run New Container') {
             steps {
-                sh '''
-                    docker stop $CONTAINER_NAME || true
-                    docker rm $CONTAINER_NAME || true
-                    docker run -d -p 3000:3000 --name $CONTAINER_NAME $IMAGE_NAME
-                '''
+                sh 'docker run -d --name \$CONTAINER_NAME -p \$PORT_MAPPING \$DOCKER_IMAGE'
             }
+        }
+    }
+
+    post {
+        failure {
+            echo 'Build failed!'
+        }
+        success {
+            echo 'Deployment successful!'
         }
     }
 }
