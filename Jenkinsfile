@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github', url: 'https://github.com/swapnil-shahapurkar/med-vault-inventory-dark-15.git', branch: 'main'
+                git credentialsId: 'github', url: 'https://github.com/swapnil-shahapurkar/med-vault-inventory-dark-74.git', branch: 'main'
             }
         }
 
