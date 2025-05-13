@@ -1,10 +1,13 @@
+# Example Dockerfile
 FROM node:18
 
 WORKDIR /app
 
-# Copy everything including node_modules
 COPY . .
 
-# Expose port and define start
-EXPOSE 3000
-CMD ["npm", "run", "dev"]
+RUN npm install
+RUN npm run build
+
+RUN npm install -g serve
+EXPOSE 4173
+CMD ["serve", "-s", "dist", "-l", "4173"]
