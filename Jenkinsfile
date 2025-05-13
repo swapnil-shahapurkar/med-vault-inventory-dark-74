@@ -8,7 +8,7 @@ pipeline {
     }
 
     tools {
-        nodejs 'NodeJS_18' // Make sure you configured this Node.js tool in Jenkins
+        nodejs 'NodeJS_18' // Make sure this is configured in Jenkins Global Tool Config
     }
 
     stages {
@@ -18,12 +18,18 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
         stage('Stop Old Container') {
             steps {
                 script {
                     sh """
-                        docker stop \$CONTAINER_NAME || true
-                        docker rm \$CONTAINER_NAME || true
+                        docker stop ${CONTAINER_NAME} || true
+                        docker rm ${CONTAINER_NAME} || true
                     """
                 }
             }
@@ -31,23 +37,23 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t \$DOCKER_IMAGE .'
+                sh "docker build -t ${DOCKER_IMAGE} ."
             }
         }
 
         stage('Run New Container') {
             steps {
-                sh 'docker run -d --name \$CONTAINER_NAME -p \$PORT_MAPPING \$DOCKER_IMAGE'
+                sh "docker run -d --name ${CONTAINER_NAME} -p ${PORT_MAPPING} ${DOCKER_IMAGE}"
             }
         }
     }
 
     post {
         failure {
-            echo 'Build failed!'
+            echo '❌ Build failed!'
         }
         success {
-            echo 'Deployment successful!'
+            echo '✅ Deployment successful!'
         }
     }
 }
