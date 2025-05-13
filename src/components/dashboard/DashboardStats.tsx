@@ -53,7 +53,7 @@ export const DashboardStats = () => {
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="stat-card p-6 glass-card">
-          <h3 className="text-muted-foreground text-sm font-medium">Total Medicines</h3>
+          <h3 className="text-muted-foreground text-sm font-medium">Total Medicines by swapnil</h3>
           <p className="text-3xl font-bold mt-2">{medicines.length}</p>
         </Card>
         
