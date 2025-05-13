@@ -1,18 +1,18 @@
-# Dockerfile
-FROM node:18-alpine
+# Use Node base image with better native support
+FROM node:18
 
+# Set working directory
 WORKDIR /app
 
+# Copy everything
 COPY . .
 
-# Install all dependencies (including dev dependencies like Vite)
+# Install dependencies
 RUN npm install
 
-# Build the project using Vite
-RUN npm run build
+# Build app (if needed)
+# RUN npm run build
 
-# Expose port (adjust according to your project)
+# Expose port and define start
 EXPOSE 3000
-
-# Run the app (you can replace with 'npm run start' or 'serve dist' as needed)
-CMD ["npm", "run", "preview"]
+CMD ["npm", "run", "dev"]
