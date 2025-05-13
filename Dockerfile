@@ -4,14 +4,14 @@ FROM node:18
 # Set working directory
 WORKDIR /app
 
-# Copy everything
-COPY . .
+# Copy package.json and package-lock.json first for better caching
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Build app (if needed)
-# RUN npm run build
+# Copy the rest of the application
+COPY . .
 
 # Expose port and define start
 EXPOSE 3000
